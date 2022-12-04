@@ -1,10 +1,10 @@
-var apiKey = "0c44bffce872e9fbb81d1be3d56eeefb"
-var lat = //39.7047
-var lon = //105.0814
-var city = //"lakewood"
-var state
-var country
-
+var apiKey = "40d87041d57fdc78be226541ef53b536";
+var lat = 39.7047
+var lon = 105.0814
+var city
+// var searchInput = document.querySelector("#searchCity");
+var searchInput = document.getElementById("searchCity")
+var searchForm = document.getElementById("submit")
 
 
 // GIVEN a weather dashboard with form inputs
@@ -18,16 +18,36 @@ var country
 // THEN I am again presented with current and future conditions for that city
 
 
-function getLatLon() {
-    var latLonApi = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid" + apiKey;
-    fetch (latLonApi)
-        .then(function (response){
-            console.log(latLonApi);
-            return response.json();
+// city.addEventListener("click",{
+//     city = document.getElementById("#searchCity")
+// })
+searchForm.addEventListener("click", cityInput);
+
+function cityInput(e) {
+    // event.preventDefault();
+    var city = searchInput.value.trim();
+    getLatLon(city)
+
+    console.log(city)
+    if (!city) {
+        console.log("No input");
+        return;
+    }
+
+
+
+    function getLatLon(city) {
+        var latLonApi = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`;
+        fetch(latLonApi).then(function(res){
+            console.log(res)
+            return res.JSON()
         })
-        .then(function (data){
+        .then(function (data) {
             console.log(data)
         })
+    }
+    console.log(latLonApi.lat,latLonApi.lon)
+    getLatLon()
 }
 
 function getApi() {
@@ -61,6 +81,7 @@ function getApi() {
         });
 }
 
+getApi()
 var weatherApi = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey
 console.log(weatherApi)
 
