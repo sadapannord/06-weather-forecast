@@ -4,8 +4,8 @@ var lon = 105.0814
 var city
 // var searchInput = document.querySelector("#searchCity");
 var searchInput = document.getElementById("searchCity")
-var searchForm = document.getElementById("submit")
-
+var searchForm = document.getElementById("testing1")
+city = searchInput.value.trim()
 
 // GIVEN a weather dashboard with form inputs
 // WHEN I search for a city
@@ -21,34 +21,35 @@ var searchForm = document.getElementById("submit")
 // city.addEventListener("click",{
 //     city = document.getElementById("#searchCity")
 // })
-searchForm.addEventListener("click", cityInput);
 
 function cityInput(e) {
     // event.preventDefault();
     var city = searchInput.value.trim();
-    getLatLon(city)
 
     console.log(city)
     if (!city) {
-        console.log("No input");
+        // console.log("No input");
         return;
     }
 
 
 
     function getLatLon(city) {
-        var latLonApi = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`;
-        fetch(latLonApi).then(function(res){
-            console.log(res)
-            return res.JSON()
-        })
-        .then(function (data) {
-            console.log(data)
-        })
+        // console.log(city,apiKey)
+        var latLonApi = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`
+        // console.log(latLonApi)
+        fetch(latLonApi).then((response) => response.json())
+        .then((data) => console.log(data));
+        //     console.log(res)
+        //     return res.json()
+        // })
+        //     .then(function (data) {
+        //         console.log(data)
+        //     })
     }
-    console.log(latLonApi.lat,latLonApi.lon)
-    getLatLon()
+    getLatLon(city)
 }
+
 
 function getApi() {
     // fetch request gets a list of all the repos for the node.js organization
@@ -56,11 +57,11 @@ function getApi() {
 
     fetch(weatherApi)
         .then(function (response) {/*once I've received data fire this function, which turns the information returned into "response" */
-            console.log(weatherApi)
+            // console.log(weatherApi)
             return response.json();
         })
         .then(function (data) {
-            console.log(data)
+            // console.log(data)
             //Loop over the data to generate a table, each table row will have a link to the repo url
             for (var i = 0; i < data.length; i++) {
                 // Creating elements, tablerow, tabledata, and anchor
@@ -83,7 +84,11 @@ function getApi() {
 
 getApi()
 var weatherApi = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey
-console.log(weatherApi)
+// console.log(weatherApi)
 
 var latLonApi = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid" + apiKey
-console.log(latLonApi)
+// console.log(latLonApi)
+
+
+
+searchForm.addEventListener("click", cityInput);
