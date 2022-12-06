@@ -23,29 +23,28 @@ city = searchInput.value.trim()
 // })
 
 function cityInput(e) {
-    // event.preventDefault();
+    e.preventDefault();
     var city = searchInput.value.trim();
 
     console.log(city)
     if (!city) {
-        // console.log("No input");
+        console.log("No input");
         return;
     }
 
 
 
     function getLatLon(city) {
-        // console.log(city,apiKey)
+        console.log(city, apiKey)
         var latLonApi = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`
-        // console.log(latLonApi)
-        fetch(latLonApi).then((response) => response.json())
-        .then((data) => console.log(data));
-        //     console.log(res)
-        //     return res.json()
-        // })
-        //     .then(function (data) {
-        //         console.log(data)
-        //     })
+        console.log(latLonApi)
+        fetch(latLonApi).then(function (res) {
+            // console.log(res)
+            return res.json()
+        })
+            .then(function (data) {
+                console.log(data)
+            })
     }
     getLatLon(city)
 }
