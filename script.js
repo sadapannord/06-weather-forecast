@@ -21,8 +21,8 @@ let submit = document.getElementById("submit")
 //     city = document.getElementById("#searchCity")
 // })
 
-function cityInput() {
-    // event.preventDefault();
+function cityInput(event) {
+    event.preventDefault();
     let city = document.getElementById("searchCity").value;
     let searchedCity = document.getElementById("searchHistory");
     let searchedCities = document.createElement("div");
@@ -37,31 +37,30 @@ function cityInput() {
     // }
 
     getApi()
-}
-
-
-function getApi() {
-    let weatherApi = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
-    console.log(weatherApi);
-    fetch(weatherApi)
+    
+    
+    function getApi() {
+        let weatherApi = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
+        console.log(weatherApi);
+        fetch(weatherApi)
         .then(function (response) {/*once I've received data fire this function, which turns the information returned into "response" */
-            console.log(weatherApi)
-            console.log(response);
-            return response.json();
-        })
-        .then(function (data) {
-            console.log(data)
-            //Loop over the data to generate a table, each table row will have a link to the repo url
-            // for (var i = 0; i < data.length; i++) {
+        console.log(weatherApi)
+        console.log(response);
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data)
+        //Loop over the data to generate a table, each table row will have a link to the repo url
+        // for (var i = 0; i < data.length; i++) {
             //     // Creating elements, tablerow, tabledata, and anchor
             //     var createTableRow = document.createElement('tr');
             //     var tableData = document.createElement('td');
             //     var link = document.createElement('a');
-
+            
             //     // Setting the text of link and the href of the link
             //     link.textContent = data[i].html_url;
             //     link.href = data[i].html_url;
-
+            
             //     // Appending the link to the tabledata and then appending the tabledata to the tablerow
             //     // The tablerow then gets appended to the tablebody
             //     tableData.appendChild(link);
@@ -69,6 +68,7 @@ function getApi() {
             //     tableBody.appendChild(createTableRow);
             // }
         });
+    }
 }
 
 
