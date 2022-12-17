@@ -23,13 +23,23 @@ let submit = document.getElementById("submit")
 
 function cityInput() {
     // event.preventDefault();
-    let city = document.getElementById('searchCity').value;
-    if (!city) {
-        console.log("No input");
-        return;
-    }
+    let city = document.getElementById("searchCity").value;
+    let searchedCity = document.getElementById("searchHistory");
+    let searchedCities = document.createElement("div");
+    searchedCities.innerHTML = city;
+    console.log(searchedCity,city);
+    // searchedCities.innerText=city;
+    console.log(searchedCities)
+    searchedCity.appendChild(searchedCities);
+    // if (!city) {
+    //     console.log("No input");
+    //     return;
+    // }
+
     getApi()
 }
+
+
 function getApi() {
     let weatherApi = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
     console.log(weatherApi);
@@ -60,6 +70,8 @@ function getApi() {
             // }
         });
 }
+
+
 
 submit.addEventListener("click", cityInput)
 // getApi()
