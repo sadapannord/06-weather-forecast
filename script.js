@@ -42,7 +42,7 @@ function cityInput(event) {
 
 
     function getApi() {
-        let weatherApi = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
+        let weatherApi = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`;
         console.log(weatherApi);
         fetch(weatherApi)
             .then(function (response) {/*once I've received data fire this function, which turns the information returned into "response" */
