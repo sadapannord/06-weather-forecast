@@ -17,23 +17,31 @@
   </header>
 
   <main>
-    <section >
-      <section class="row">
-        <div class="col l2">
+    <section>
+      <section class="row flex">
+        <div class="col l2  deep-purple lighten-1">
           <div class="col">
             <form>
               <h2>Search for a City:<label for="searchCity"></label></h2>
               <input type="search" id="searchCity" name="searchCity">
-              <input type="submit" id="submit">
+              <input type="submit" id="submit" class="">
             </form>
           </div>
           <div>
             <h2 id="searchHistory">Search History</h2>
           </div>
         </div>
-        <section class="col">
-          <h2 id="searchResult"></h2>
-
+        <section class="col l10 blue lighten-2">
+          <div class="row">
+            <h2 id="currentSearch"></h2>
+            <h3> Current Data:</h3>
+            <h4 id="currentTemp">Current Temp:</h4>
+            <h4 id ="currentWind">Wind:</h4>
+            <h4 id ="currentHumidity">Humidity:</h4>
+          </div>
+          <div class="row blue lighten-1">
+            <h3> 5 Day Forecast</h3>
+          </div>
         </section>
       </section>
     </section>
