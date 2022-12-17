@@ -1,11 +1,10 @@
-var apiKey = "40d87041d57fdc78be226541ef53b536";
-var lat = 39.7047
-var lon = 105.0814
-var city
+const apiKey = "40d87041d57fdc78be226541ef53b536";
+let city = "";
 // var searchInput = document.querySelector("#searchCity");
-var searchInput = document.getElementById("searchCity")
-var searchForm = document.getElementById("testing1")
-city = searchInput.value.trim()
+let searchInput = document.getElementById("searchCity")
+// var searchForm = document.getElementById("testing1")
+let submit = document.getElementById("submit")
+// city = searchInput.value.trim()
 
 // GIVEN a weather dashboard with form inputs
 // WHEN I search for a city
@@ -22,72 +21,49 @@ city = searchInput.value.trim()
 //     city = document.getElementById("#searchCity")
 // })
 
-function cityInput(e) {
-    e.preventDefault();
-    var city = searchInput.value.trim();
-
-    console.log(city)
+function cityInput() {
+    // event.preventDefault();
+    let city = document.getElementById('searchCity').value;
     if (!city) {
         console.log("No input");
         return;
     }
-
-
-
-    function getLatLon(city) {
-        console.log(city, apiKey)
-        var latLonApi = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`
-        console.log(latLonApi)
-        fetch(latLonApi).then(function (res) {
-            // console.log(res)
-            return res.json()
-        })
-            .then(function (data) {
-                console.log(data)
-            })
-    }
-    getLatLon(city)
+    getApi()
 }
-
-
 function getApi() {
-    // fetch request gets a list of all the repos for the node.js organization
-    var weatherApi = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey
-
+    let weatherApi = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
+    console.log(weatherApi);
     fetch(weatherApi)
         .then(function (response) {/*once I've received data fire this function, which turns the information returned into "response" */
-            // console.log(weatherApi)
+            console.log(weatherApi)
+            console.log(response);
             return response.json();
         })
         .then(function (data) {
-            // console.log(data)
+            console.log(data)
             //Loop over the data to generate a table, each table row will have a link to the repo url
-            for (var i = 0; i < data.length; i++) {
-                // Creating elements, tablerow, tabledata, and anchor
-                var createTableRow = document.createElement('tr');
-                var tableData = document.createElement('td');
-                var link = document.createElement('a');
+            // for (var i = 0; i < data.length; i++) {
+            //     // Creating elements, tablerow, tabledata, and anchor
+            //     var createTableRow = document.createElement('tr');
+            //     var tableData = document.createElement('td');
+            //     var link = document.createElement('a');
 
-                // Setting the text of link and the href of the link
-                link.textContent = data[i].html_url;
-                link.href = data[i].html_url;
+            //     // Setting the text of link and the href of the link
+            //     link.textContent = data[i].html_url;
+            //     link.href = data[i].html_url;
 
-                // Appending the link to the tabledata and then appending the tabledata to the tablerow
-                // The tablerow then gets appended to the tablebody
-                tableData.appendChild(link);
-                createTableRow.appendChild(tableData);
-                tableBody.appendChild(createTableRow);
-            }
+            //     // Appending the link to the tabledata and then appending the tabledata to the tablerow
+            //     // The tablerow then gets appended to the tablebody
+            //     tableData.appendChild(link);
+            //     createTableRow.appendChild(tableData);
+            //     tableBody.appendChild(createTableRow);
+            // }
         });
 }
 
-getApi()
-var weatherApi = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey
-// console.log(weatherApi)
-
-var latLonApi = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid" + apiKey
-// console.log(latLonApi)
+submit.addEventListener("click", cityInput)
+// getApi()
 
 
 
-searchForm.addEventListener("click", cityInput);
+// searchForm.addEventListener("click", cityInput);
