@@ -1,10 +1,9 @@
 const apiKey = "40d87041d57fdc78be226541ef53b536";
 let city = "";
-// var searchInput = document.querySelector("#searchCity");
-let searchInput = document.getElementById("searchCity")
-// var searchForm = document.getElementById("testing1")
-let submit = document.getElementById("submit")
-// city = searchInput.value.trim()
+let searchInput = document.getElementById("searchCity");
+let submit = document.getElementById("submit");
+let currentDate= new Date().toLocaleDateString();
+console.log(currentDate)
 
 // GIVEN a weather dashboard with form inputs
 // WHEN I search for a city
@@ -41,6 +40,9 @@ function cityInput(event) {
 
 
 
+
+
+
     function getApi() {
         let weatherApi = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`;
         console.log(weatherApi);
@@ -53,12 +55,17 @@ function cityInput(event) {
             .then(function (data) {
                 console.log(data)
                 // let currentSearch = document.getElementById("currentSearch")
+                let today = document.getElementById("currentDate");
+                today.innerHTML = currentDate;
                 let temp = document.getElementById("currentTemp");
-                temp.innerHTML += data.list[0].main.temp;
+                temp.innerHTML = data.list[0].main.temp;
                 let wind = document.getElementById("currentWind");
-                wind.innerHTML += data.list[0].wind.speed;
+                wind.innerHTML = data.list[0].wind.speed;
                 let humidity = document.getElementById("currentHumidity");
-                humidity.innerHTML += data.list[0].main.humidity;
+                humidity.innerHTML = data.list[0].main.humidity;
+                let icon = document.getElementById("currentIcon");
+                icon.innerHTML = data.list[0].weather.icon;
+                // console.log(icon, humidity);
                 // currentSearch.appendChild(temp);
 
                 //Loop over the data to generate a table, each table row will have a link to the repo url
@@ -79,6 +86,7 @@ function cityInput(event) {
                 //     tableBody.appendChild(createTableRow);
                 // }
             });
+        $('input[name="searchCity"]').val('');
     }
 }
 
