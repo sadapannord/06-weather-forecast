@@ -63,8 +63,12 @@ function cityInput(event) {
                 wind.innerHTML = data.list[0].wind.speed;
                 let humidity = document.getElementById("currentHumidity");
                 humidity.innerHTML = data.list[0].main.humidity;
-                let icon = document.getElementById("currentIcon");
-                icon.innerHTML = data.list[0].weather.icon;
+                let icon = data.list[0].weather.icon;
+                console.log(icon,"hello")
+                // fetch(`http://openweathermap.org/img/wn/${icon}@2x.png`);
+                // icon = document.getElementById("currentIcon");
+                // icon.innerHTML 
+            });
                 // console.log(icon, humidity);
                 // currentSearch.appendChild(temp);
 
@@ -85,7 +89,6 @@ function cityInput(event) {
                 //     createTableRow.appendChild(tableData);
                 //     tableBody.appendChild(createTableRow);
                 // }
-            });
         $('input[name="searchCity"]').val('');
     }
 }
