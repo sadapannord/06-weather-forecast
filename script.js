@@ -2,8 +2,7 @@ const apiKey = "40d87041d57fdc78be226541ef53b536";
 let city = "";
 let searchInput = document.getElementById("searchCity");
 let submit = document.getElementById("submit");
-let currentDate= new Date().toLocaleDateString();
-console.log(currentDate)
+let currentDate = dayjs().format('MM/DD/YYYY');
 
 // GIVEN a weather dashboard with form inputs
 // WHEN I search for a city
@@ -35,8 +34,9 @@ function cityInput(event) {
     let currentSearch = document.getElementById("currentSearch");
     currentSearch.innerHTML = city;
     let local = JSON.parse(localStorage.getItem("city") || "[]");
-    local.push(city)
-    localStorage.setItem("city", JSON.stringify(local))
+    local.push(city);
+    localStorage.setItem("city", JSON.stringify(local));
+    getFiveDay();
 
 
 
@@ -48,14 +48,11 @@ function cityInput(event) {
         console.log(weatherApi);
         fetch(weatherApi)
             .then(function (response) {/*once I've received data fire this function, which turns the information returned into "response" */
-                console.log(weatherApi)
-                console.log(response);
                 return response.json();
             })
             .then(function (data) {
-                console.log(data)
-                // let currentSearch = document.getElementById("currentSearch")
                 let today = document.getElementById("currentDate");
+                console.log(data)
                 today.innerHTML = currentDate;
                 let temp = document.getElementById("currentTemp");
                 temp.innerHTML = data.list[0].main.temp;
@@ -63,39 +60,67 @@ function cityInput(event) {
                 wind.innerHTML = data.list[0].wind.speed;
                 let humidity = document.getElementById("currentHumidity");
                 humidity.innerHTML = data.list[0].main.humidity;
-                let icon = data.list[0].weather.icon;
-                console.log(icon,"hello")
+                let icon = data.list[0].weather[0].icon;
+                console.log(icon, "hello")
                 // fetch(`http://openweathermap.org/img/wn/${icon}@2x.png`);
                 // icon = document.getElementById("currentIcon");
                 // icon.innerHTML 
             });
-                // console.log(icon, humidity);
-                // currentSearch.appendChild(temp);
+        // console.log(icon, humidity);
+        // currentSearch.appendChild(temp);
 
-                //Loop over the data to generate a table, each table row will have a link to the repo url
-                // for (var i = 0; i < data.length; i++) {
-                //     // Creating elements, tablerow, tabledata, and anchor
-                //     var createTableRow = document.createElement('tr');
-                //     var tableData = document.createElement('td');
-                //     var link = document.createElement('a');
+        //Loop over the data to generate a table, each table row will have a link to the repo url
+        // for (var i = 0; i < data.length; i++) {
+        //     // Creating elements, tablerow, tabledata, and anchor
+        //     var createTableRow = document.createElement('tr');
+        //     var tableData = document.createElement('td');
+        //     var link = document.createElement('a');
 
-                //     // Setting the text of link and the href of the link
-                //     link.textContent = data[i].html_url;
-                //     link.href = data[i].html_url;
+        //     // Setting the text of link and the href of the link
+        //     link.textContent = data[i].html_url;
+        //     link.href = data[i].html_url;
 
-                //     // Appending the link to the tabledata and then appending the tabledata to the tablerow
-                //     // The tablerow then gets appended to the tablebody
-                //     tableData.appendChild(link);
-                //     createTableRow.appendChild(tableData);
-                //     tableBody.appendChild(createTableRow);
-                // }
+        //     // Appending the link to the tabledata and then appending the tabledata to the tablerow
+        //     // The tablerow then gets appended to the tablebody
+        //     tableData.appendChild(link);
+        //     createTableRow.appendChild(tableData);
+        //     tableBody.appendChild(createTableRow);
+        // }
         $('input[name="searchCity"]').val('');
     }
+    function getFiveDay() {
+        let fiveDay = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`;
+        let fiveDayArray = [""];
+        let length = 41;
+        fetch(fiveDay)
+            .then(function (response) {/*once I've received data fire this function, which turns the information returned into "response" */
+                return response.json();
+            })
+            .then(function (data) {
+                for (let i = 8; i < length; i + 8) {
+                    let firstForecast = document.querySelector("fiveDay");
+                    firstForecast = document.createElement('div');
+                    let temp = document.getElementById("currentTemp");
+                    temp.innerHTML = data.list[0].main.temp;
+                    let wind = document.getElementById("currentWind");
+                    wind.innerHTML = data.list[0].wind.speed;
+                    let humidity = document.getElementById("currentHumidity");
+                    humidity.innerHTML = data.list[0].main.humidity;
+                    let icon = data.list[0].weather[0].icon;
+                    console.log(icon, "hello");
+                    fetch(`http://openweathermap.org/img/wn/${icon}@2x.png`);
+                    icon = document.getElementById("currentIcon");
+                    icon.innerHTML;
+                    return;
+
+                }
+
+            })
+    }
+
 }
 
-
-
-submit.addEventListener("click", cityInput)
+    submit.addEventListener("click", cityInput)
 // getApi()
 
 
