@@ -63,7 +63,7 @@ function cityInput(event) {
                 humidity.innerHTML = data.list[0].main.humidity;
                 let icon = data.list[0].weather[0].icon;
                 console.log(icon, "hello")
-                let iconUrl = `"http://openweathermap.org/img/wn/${icon}@2x.png"` //why is this searching my files, not the URL?
+                let iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png` //why is this searching my files, not the URL?
                 let iconImg = document.createElement("img");
                 iconImg.src = iconUrl
                 document.getElementById("currentIcon").appendChild(iconImg)
