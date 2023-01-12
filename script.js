@@ -4,6 +4,7 @@ let searchInput = document.getElementById("searchCity");
 let submit = document.getElementById("submit");
 let currentDate = dayjs().format('MM/DD/YYYY');
 
+
 // GIVEN a weather dashboard with form inputs
 // WHEN I search for a city
 // THEN I am presented with current and future conditions for that city and that city is added to the search history
@@ -62,9 +63,12 @@ function cityInput(event) {
                 humidity.innerHTML = data.list[0].main.humidity;
                 let icon = data.list[0].weather[0].icon;
                 console.log(icon, "hello")
-                // fetch(`http://openweathermap.org/img/wn/${icon}@2x.png`);
-                // icon = document.getElementById("currentIcon");
-                // icon.innerHTML 
+                let iconUrl = `"http://openweathermap.org/img/wn/${icon}@2x.png"` //why is this searching my files, not the URL?
+                let iconImg = document.createElement("img");
+                iconImg.src = iconUrl
+                document.getElementById("currentIcon").appendChild(iconImg)
+
+
             });
         // console.log(icon, humidity);
         // currentSearch.appendChild(temp);
@@ -120,7 +124,7 @@ function cityInput(event) {
 
 }
 
-    submit.addEventListener("click", cityInput)
+submit.addEventListener("click", cityInput)
 // getApi()
 
 
