@@ -39,11 +39,6 @@ function cityInput(event) {
     localStorage.setItem("city", JSON.stringify(local));
     getFiveDay();
 
-
-
-
-
-
     function getApi() {
         let weatherApi = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`;
         console.log(weatherApi);
@@ -63,33 +58,14 @@ function cityInput(event) {
                 humidity.innerHTML = data.list[0].main.humidity;
                 let icon = data.list[0].weather[0].icon;
                 console.log(icon, "hello")
-                let iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png` //why is this searching my files, not the URL?
+                let iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png` 
                 let iconImg = document.createElement("img");
                 iconImg.src = iconUrl
                 document.getElementById("currentIcon").appendChild(iconImg)
 
 
             });
-        // console.log(icon, humidity);
-        // currentSearch.appendChild(temp);
 
-        //Loop over the data to generate a table, each table row will have a link to the repo url
-        // for (var i = 0; i < data.length; i++) {
-        //     // Creating elements, tablerow, tabledata, and anchor
-        //     var createTableRow = document.createElement('tr');
-        //     var tableData = document.createElement('td');
-        //     var link = document.createElement('a');
-
-        //     // Setting the text of link and the href of the link
-        //     link.textContent = data[i].html_url;
-        //     link.href = data[i].html_url;
-
-        //     // Appending the link to the tabledata and then appending the tabledata to the tablerow
-        //     // The tablerow then gets appended to the tablebody
-        //     tableData.appendChild(link);
-        //     createTableRow.appendChild(tableData);
-        //     tableBody.appendChild(createTableRow);
-        // }
         $('input[name="searchCity"]').val('');
     }
     function getFiveDay() {
@@ -102,19 +78,32 @@ function cityInput(event) {
             })
             .then(function (data) {
                 for (let i = 8; i < length; i + 8) {
-                    let firstForecast = document.querySelector("fiveDay");
-                    firstForecast = document.createElement('div');
-                    let temp = document.getElementById("currentTemp");
-                    temp.innerHTML = data.list[0].main.temp;
-                    let wind = document.getElementById("currentWind");
-                    wind.innerHTML = data.list[0].wind.speed;
-                    let humidity = document.getElementById("currentHumidity");
-                    humidity.innerHTML = data.list[0].main.humidity;
-                    let icon = data.list[0].weather[0].icon;
-                    console.log(icon, "hello");
-                    fetch(`http://openweathermap.org/img/wn/${icon}@2x.png`);
-                    icon = document.getElementById("currentIcon");
-                    icon.innerHTML;
+                    // let firstForecast = document.querySelector("fiveDay");
+                    // firstForecast = document.createElement('div');
+                    // let temp = document.getElementById("currentTemp");
+                    // temp.innerHTML = data.list[0].main.temp;
+                    // let wind = document.getElementById("currentWind");
+                    // wind.innerHTML = data.list[0].wind.speed;
+                    // let humidity = document.getElementById("currentHumidity");
+                    // humidity.innerHTML = data.list[0].main.humidity;
+                    // let icon = data.list[0].weather[0].icon;
+                    // console.log(icon, "hello");
+                    // let iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png` 
+                    // let iconImg = document.createElement("img");
+                    // iconImg.src = iconUrl
+                    // document.getElementById("currentIcon").appendChild(iconImg)
+                    let temp = document.getElementById("testTemp");
+                    temp.innerHTML = data.list[i].main.temp;
+                    let wind = document.getElementById("testWind");
+                    wind.innerHTML = data.list[i].wind.speed;
+                    let humidity = document.getElementById("testHumidity");
+                    humidity.innerHTML = data.list[i].main.humidity;
+                    let icon = data.list[i].weather[0].icon;
+                    console.log(icon, "hello")
+                    let iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png` 
+                    let iconImg = document.createElement("img");
+                    iconImg.src = iconUrl
+                    document.getElementById("testIcon").appendChild(iconImg)
                     return;
 
                 }
