@@ -1,8 +1,13 @@
-/* p {
+p {
  color:blue;   
 }
 
-/* .flex {
+.flex {
     display: flex;
     flex-wrap: wrap;
-  } */ */
+  }
+
+img {
+max-width: 15%;
+max-height: 15%;
+}

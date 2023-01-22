@@ -26,9 +26,6 @@ function cityInput(event) {
     let searchedCity = document.getElementById("searchHistory");
     let searchedCities = document.createElement("button");
     searchedCities.innerHTML = city;
-    console.log(searchedCity, city);
-    // searchedCities.innerText=city;
-    console.log(searchedCities)
     searchedCity.appendChild(searchedCities);
     $('input[name="searchCity"]').val('');
     getApi()
@@ -37,13 +34,12 @@ function cityInput(event) {
     let local = JSON.parse(localStorage.getItem("city") || "[]");
     local.push(city);
     localStorage.setItem("city", JSON.stringify(local));
-    getFiveDay();
 
     function getApi() {
         let weatherApi = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`;
         console.log(weatherApi);
         fetch(weatherApi)
-            .then(function (response) {/*once I've received data fire this function, which turns the information returned into "response" */
+            .then(function (response) {
                 return response.json();
             })
             .then(function (data) {
@@ -58,60 +54,37 @@ function cityInput(event) {
                 humidity.innerHTML = data.list[0].main.humidity;
                 let icon = data.list[0].weather[0].icon;
                 console.log(icon, "hello")
-                let iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png` 
-                let iconImg = document.createElement("img");
-                iconImg.src = iconUrl
-                document.getElementById("currentIcon").appendChild(iconImg)
-
-
-            });
-
-        $('input[name="searchCity"]').val('');
-    }
-    function getFiveDay() {
-        let fiveDay = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`;
-        let fiveDayArray = [""];
-        let length = 41;
-        fetch(fiveDay)
-            .then(function (response) {/*once I've received data fire this function, which turns the information returned into "response" */
-                return response.json();
-            })
-            .then(function (data) {
-                for (let i = 8; i < length; i + 8) {
-                    // let firstForecast = document.querySelector("fiveDay");
-                    // firstForecast = document.createElement('div');
-                    // let temp = document.getElementById("currentTemp");
-                    // temp.innerHTML = data.list[0].main.temp;
-                    // let wind = document.getElementById("currentWind");
-                    // wind.innerHTML = data.list[0].wind.speed;
-                    // let humidity = document.getElementById("currentHumidity");
-                    // humidity.innerHTML = data.list[0].main.humidity;
-                    // let icon = data.list[0].weather[0].icon;
-                    // console.log(icon, "hello");
-                    // let iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png` 
-                    // let iconImg = document.createElement("img");
-                    // iconImg.src = iconUrl
-                    // document.getElementById("currentIcon").appendChild(iconImg)
-                    let temp = document.getElementById("testTemp");
-                    temp.innerHTML = data.list[i].main.temp;
-                    let wind = document.getElementById("testWind");
-                    wind.innerHTML = data.list[i].wind.speed;
-                    let humidity = document.getElementById("testHumidity");
-                    humidity.innerHTML = data.list[i].main.humidity;
+                let iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`
+                let iconImg = document.getElementById("currentIcon");
+                iconImg.src = iconUrl;
+                for (let i = 7; i <= 40; i += 8) {
+                    let temp = document.createElement("div");
+                    temp.innerHTML = "Temperature: " + data.list[i].main.temp;
+                    document.querySelector(".fiveDay").appendChild(temp)
+                    let wind = document.createElement("div");
+                    wind.innerHTML = "Wind speed: " + data.list[i].wind.speed;
+                    document.querySelector(".fiveDay").appendChild(wind)
+                    let humidity = document.createElement("div");
+                    humidity.innerHTML = "Humidity: " + data.list[i].main.humidity;
+                    document.querySelector(".fiveDay").appendChild(humidity)
                     let icon = data.list[i].weather[0].icon;
-                    console.log(icon, "hello")
-                    let iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png` 
+                    // console.log(icon, "hello")
+                    let iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`
                     let iconImg = document.createElement("img");
                     iconImg.src = iconUrl
-                    document.getElementById("testIcon").appendChild(iconImg)
-                    return;
+                    document.querySelector(".fiveDay").appendChild(iconImg)
 
+                    $('input[name="searchCity"]').val('');
+                    ;
                 }
-
             })
     }
+    searchedCities.addEventListener("click", getApi)
 
 }
+
+
+
 
 submit.addEventListener("click", cityInput)
 // getApi()
