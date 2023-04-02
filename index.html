@@ -11,55 +11,51 @@
 </head>
 
 <body>
-  <header class="container-fluid">
+  <header class="container">
     <h1>Weather Dashboard</h1>
 
   </header>
 
   <main>
-    <section>
-      <section class="row flex">
-        <div class="col l2  deep-purple lighten-1">
-          <div class="col">
-            <form>
-              <h2>Search for a City:<label for="searchCity"></label></h2>
-              <input type="search" id="searchCity" name="searchCity">
-              <input type="submit" id="submit" class="">
-            </form>
-          </div>
-          <div>
-            <h2 id="searchHistory">Search History</h2>
-          </div>
+    <section class="row flex">
+      <div class="col l2  deep-purple lighten-1">
+        <div class="col">
+          <form>
+            <h3>Search for a City:<label for="searchCity"></label></h3>
+            <input type="search" id="searchCity" name="searchCity">
+           <input type="submit" id="submit" class=""> 
+          </form>
         </div>
-        <section class="col l9 blue lighten-2">
-          <div class="row">
-            <div class="row">
-              <h3> Current Data:</h3>
-            </div>
-            <div class="row">
-              <h4 class="col l4" id="currentSearch">
-              </h4>
-              <h5>
-                <div class="col l4" id="currentDate"></div>
-              </h5>
-              <h4>
-                <img class="col l4" id="currentIcon"></img>
-              </h4>
-            </div>
-            <div class="row">
-              <h5 class="col l4">Current Temp: <div id="currentTemp"></div><span>°F</span></h5>
-              <h5 class="col l4">Wind:<div id="currentWind"></div>
-              </h5>
-              <h5 class="col l4">Humidity:<div id="currentHumidity"></div>
-              </h5>
-            </div>
-          </div>
-          <div class="row blue lighten-1 fiveDay">
-            <h3 class="forecast"> 5 Day Forecast</h3>
-          </div>
+        <div>
+          <h3 id="searchHistory">Search History:</h3>
+        </div>
+      </div>
+      <div class="col l9 blue lighten-2">
+        <div class="row">
+           <h3> Current Data:</h3>
+        </div>
+        <div class="row">
+          <h4 class="col l4" id="currentSearch"></h4>
+          <h5>
+            <div class="col l4" id="currentDate"></div>
+          </h5>
+          <h4>
+            <img class="col l4" id="currentIcon"></img>
+          </h4>
+        </div>
+        <div class="row">
+            <h5 class="col l4">Current Temp: <div id="currentTemp"></div><span>°F</span></h5>
+            <h5 class="col l4">Wind:<div id="currentWind"></div></h5>
+            <h5 class="col l4">Humidity:<div id="currentHumidity"></div></h5>
+        </div>
+        <div class="row">
+          <h3 class="forecast col"> 5 Day Forecast</h3>
+        </div>
+        <div class="row">
+          <div class="col fiveDay"></div>
+        </div>
+      </div>
 
-        </section>
-      </section>
     </section>
 
   </main>
